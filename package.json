@@ -1,0 +1,26 @@
+{
+  "name": "gameoflife.ts",
+  "description": "Conway's Game of Life in Typescript",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "lite-server",
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/steelethis/GameOfLife.TS.git"
+  },
+  "author": "Josh Steele",
+  "bugs": {
+    "url": "https://github.com/steelethis/GameOfLife.TS/issues"
+  },
+  "homepage": "https://github.com/steelethis/GameOfLife.TS#readme",
+  "devDependencies": {
+    "lite-server": "^2.3.0",
+    "ts-loader": "^3.1.1",
+    "tslint": "^5.8.0",
+    "typescript": "^2.6.1",
+    "webpack": "^3.8.1"
+  },
+  "dependencies": {}
+}
