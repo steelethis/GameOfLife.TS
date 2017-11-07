@@ -1,6 +1,11 @@
 export class Cell {
+    private alive: boolean;
 
-    public testFunc(message: string): void {
-        console.log(message);
+    get Alive(): boolean {
+        return this.alive;
+    }
+
+    constructor(status: boolean) {
+        this.alive = status;
     }
 }
