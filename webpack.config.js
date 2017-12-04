@@ -7,14 +7,24 @@ module.exports = {
     module: {
         rules: [
             {
+                test: /\.vue$/,
+                loader: "vue-loader",
+            },
+            {
                 test: /\.tsx?$/,
-                use: "ts-loader",
-                exclude: /node_modules/
+                loader: "ts-loader",
+                exclude: /node_modules/,
+                options: {
+                    appendTsSuffixTo: [/\.vue$/],
+                }
             }
         ]
     },
     resolve: {
-        extensions: [".tsx", ".ts", ".js"]
+        extensions: [".tsx", ".ts", ".js", ".vue"],
+        alias: {
+            "vue$": "vue/dist/vue.esm.js"
+        }
     },
     output: {
         filename: "bundle.js",

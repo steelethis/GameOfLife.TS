@@ -1,56 +1,65 @@
-import { Cell } from "./gameoflife/cell";
-import { Game } from "./gameoflife/game";
+import Vue from "vue";
+import GameofLifeComponent from "./Components/GameofLife.vue";
 
-let canvas: HTMLCanvasElement;
-let context: CanvasRenderingContext2D;
+let v = new Vue({
+    el: "#app",
+    template: "<GameofLifeComponent/>",
+    components: {GameofLifeComponent},
+});
 
-let canvasWidth = 400;
-let canvasHeight = 400;
-let pixelScale = 2;
+// import { Cell } from "./gameoflife/cell";
+// import { Game } from "./gameoflife/game";
 
-let fps: number = 10;
-let interval: number = 1000 / fps;
-let then: number = Date.now();
+// let canvas: HTMLCanvasElement;
+// let context: CanvasRenderingContext2D;
 
-let game: Game;
+// let canvasWidth = 400;
+// let canvasHeight = 400;
+// let pixelScale = 2;
 
-function setCanvasDimensions(width: number, height: number): void {
-    canvas = document.getElementById("gameCanvas") as HTMLCanvasElement;
-    context = canvas.getContext("2d") as CanvasRenderingContext2D;
+// let fps: number = 10;
+// let interval: number = 1000 / fps;
+// let then: number = Date.now();
 
-    canvas.width = width;
-    canvas.height = height;
-}
+// let game: Game;
 
-function animationLoop(): void {
-    let now: number = Date.now();
-    let delta: number = now - then;
+// function setCanvasDimensions(width: number, height: number): void {
+//     canvas = document.getElementById("gameCanvas") as HTMLCanvasElement;
+//     context = canvas.getContext("2d") as CanvasRenderingContext2D;
 
-    if (delta > interval) {
-        then = now - (delta % interval);
-        drawFrame(game.Biome);
-        game.update();
-    }
-    requestAnimationFrame(animationLoop);
-}
+//     canvas.width = width;
+//     canvas.height = height;
+// }
 
-function drawFrame(drawableCells: Cell[][]): void {
-    context.clearRect(0, 0, canvasWidth, canvasHeight);
+// function animationLoop(): void {
+//     let now: number = Date.now();
+//     let delta: number = now - then;
 
-    drawableCells.forEach((row: Cell[], x: number) => {
-        row.forEach((cell: Cell, y: number) => {
-            if (cell.Alive) {
-                context.fillStyle = "#FF0000";
-                context.fillRect(x * pixelScale, y * pixelScale, pixelScale, pixelScale);
-            }
-        });
-    });
-}
+//     if (delta > interval) {
+//         then = now - (delta % interval);
+//         drawFrame(game.Biome);
+//         game.update();
+//     }
+//     requestAnimationFrame(animationLoop);
+// }
 
-window.onload = () => {
-    setCanvasDimensions(canvasWidth, canvasHeight);
+// function drawFrame(drawableCells: Cell[][]): void {
+//     context.clearRect(0, 0, canvasWidth, canvasHeight);
 
-    game = new Game(canvasWidth / pixelScale, canvasHeight / pixelScale);
+//     drawableCells.forEach((row: Cell[], x: number) => {
+//         row.forEach((cell: Cell, y: number) => {
+//             if (cell.Alive) {
+//                 context.fillStyle = "#FF0000";
+//                 context.fillRect(x * pixelScale, y * pixelScale, pixelScale, pixelScale);
+//             }
+//         });
+//     });
+// }
 
-    animationLoop();
-};
+// window.onload = () => {
+//     setCanvasDimensions(canvasWidth, canvasHeight);
+
+//     game = new Game(canvasWidth / pixelScale, canvasHeight / pixelScale);
+
+//     animationLoop();
+// };
