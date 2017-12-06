@@ -1,5 +1,5 @@
 <template>
-    <p>Hello World</p>
+    <canvas id="gameCanvas"></canvas>
 </template>
 
 <script lang="ts">
@@ -28,14 +28,16 @@ export default class GameofLifeComponent extends Vue {
     private then: number;
 
     mounted() {
-        this.setCanvasDimensions(400, 400);
+        this.canvas = document.getElementById("gameCanvas") as HTMLCanvasElement;
+        this.context = this.canvas.getContext("2d") as CanvasRenderingContext2D;
+        this.setCanvasDimensions(200, 200);
         this.pixelScale = 2;
         this.targetFps = 10;
     }
 
     private setCanvasDimensions(width: number, height: number): void {
-        this.canvasWidth = width;
-        this.canvasHeight = height;
+        this.canvas.width = width;
+        this.canvas.height = height;
     }
 }
 </script>
