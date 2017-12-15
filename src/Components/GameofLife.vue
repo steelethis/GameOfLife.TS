@@ -1,5 +1,10 @@
 <template>
-    <canvas id="gameCanvas"></canvas>
+    <div>
+        <div class="options-panel">
+            <p>Height: {{canvasHeight}} Width: {{canvasWidth}}</p>
+        </div>
+        <canvas id="gameCanvas"></canvas>
+    </div>
 </template>
 
 <script lang="ts">
@@ -16,6 +21,7 @@ export default class GameofLifeComponent extends Vue {
     context: CanvasRenderingContext2D;
     canvasWidth: number;
     canvasHeight: number;
+    testVal: number = 10;
     pixelScale: number;
     targetFps: number;
 
@@ -27,17 +33,22 @@ export default class GameofLifeComponent extends Vue {
     // Timestamp used to determine framerate.
     private then: number;
 
+    created() {
+        this.canvasWidth = 200;
+        this.canvasHeight = 200;
+    }
+
     mounted() {
         this.canvas = document.getElementById("gameCanvas") as HTMLCanvasElement;
         this.context = this.canvas.getContext("2d") as CanvasRenderingContext2D;
-        this.setCanvasDimensions(200, 200);
+        this.setCanvasDimensions(this.canvasWidth, this.canvasHeight);
         this.pixelScale = 2;
         this.targetFps = 10;
     }
 
     private setCanvasDimensions(width: number, height: number): void {
-        this.canvas.width = width;
-        this.canvas.height = height;
+        this.canvas.width = this.canvasWidth;
+        this.canvas.height = this.canvasHeight;
     }
 }
 </script>
