@@ -1,6 +1,7 @@
 <template>
     <div>
         <div class="options-panel">
+            <input v-model="canvasWidth">
             <p>Height: {{canvasHeight}} Width: {{canvasWidth}}</p>
         </div>
         <canvas id="gameCanvas"></canvas>
@@ -11,16 +12,16 @@
 import Vue from "vue";
 import Component from "vue-class-component";
 
-import Cell from "../gameoflife/cell";
-import Game from "../gameoflife/game";
+import * as Cell from "../gameoflife/cell";
+import * as Game from "../gameoflife/game";
 
 @Component
 export default class GameofLifeComponent extends Vue {
     // Data Properties
     canvas: HTMLCanvasElement;
     context: CanvasRenderingContext2D;
-    canvasWidth: number;
-    canvasHeight: number;
+    canvasWidth: number = 200;
+    canvasHeight: number = 200;
     testVal: number = 10;
     pixelScale: number;
     targetFps: number;
@@ -33,9 +34,9 @@ export default class GameofLifeComponent extends Vue {
     // Timestamp used to determine framerate.
     private then: number;
 
+
+// DONT SET VALUES HERE UNLESS YOU PLAN ON THEM NEVER CHANGING.  I learned something about Vue here.
     created() {
-        this.canvasWidth = 200;
-        this.canvasHeight = 200;
     }
 
     mounted() {

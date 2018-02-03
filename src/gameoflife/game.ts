@@ -1,6 +1,6 @@
-import { Cell } from "./cell";
+import {Cell} from "./cell";
 
-export class Game {
+export default class Game {
     private biome: Cell[][];
 
     get Biome(): Cell[][] {
