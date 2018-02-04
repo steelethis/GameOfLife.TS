@@ -1,10 +1,21 @@
 <template>
     <div>
         <div class="options-panel">
+            <select v-model="selectedCanvasSize">
+                <option v-for="option in canvasSizeOptions" v-bind:value="option.size" v-bind:key="option.label">
+                    {{ option.label }}
+                </option>
+            </select>
+            <span>{{ selectedCanvasSize }}</span>
             <input v-model="canvasWidth">
             <p>Height: {{canvasHeight}} Width: {{canvasWidth}}</p>
         </div>
-        <canvas id="gameCanvas"></canvas>
+        <div class="game-values">
+
+        </div>
+        <div>
+            <canvas id="gameCanvas"></canvas>
+        </div>
     </div>
 </template>
 
@@ -22,9 +33,17 @@ export default class GameofLifeComponent extends Vue {
     context: CanvasRenderingContext2D;
     canvasWidth: number = 200;
     canvasHeight: number = 200;
-    testVal: number = 10;
     pixelScale: number;
     targetFps: number;
+
+    selectedCanvasSize: number = 200;
+
+    canvasSizeOptions: Array<object> = [
+        {label: "200x200", size: 200},
+        {label: "400x400", size: 400},
+        {label: "600x600", size: 600},
+        {label: "800x800", size: 800}
+    ]
 
     private _interval: number;
     get interval():number {
