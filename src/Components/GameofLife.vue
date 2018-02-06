@@ -1,17 +1,17 @@
 <template>
     <div>
         <div class="options-panel">
+            <label>Canvas Size:</label>
             <select v-model="selectedCanvasSize">
                 <option v-for="option in canvasSizeOptions" v-bind:value="option.size" v-bind:key="option.label">
                     {{ option.label }}
                 </option>
             </select>
-            <span>{{ selectedCanvasSize }}</span>
-            <input v-model="canvasWidth">
-            <p>Height: {{canvasHeight}} Width: {{canvasWidth}}</p>
+
+            <button @click="onClick">Start Game!</button>
         </div>
         <div class="game-values">
-
+            <span>Height: {{canvasHeight}} Width: {{canvasWidth}}</span>
         </div>
         <div>
             <canvas id="gameCanvas"></canvas>
@@ -22,6 +22,7 @@
 <script lang="ts">
 import Vue from "vue";
 import Component from "vue-class-component";
+import {Watch} from "vue-property-decorator";
 
 import * as Cell from "../gameoflife/cell";
 import * as Game from "../gameoflife/game";
@@ -53,8 +54,20 @@ export default class GameofLifeComponent extends Vue {
     // Timestamp used to determine framerate.
     private then: number;
 
+    @Watch("selectedCanvasSize")
+    onSizeChanged(val: number, oldVal: number): void {
+        this.canvasWidth = val;
+        this.canvasHeight = val;
 
-// DONT SET VALUES HERE UNLESS YOU PLAN ON THEM NEVER CHANGING.  I learned something about Vue here.
+        this.setCanvasDimensions(this.canvasWidth, this.canvasHeight);
+    }
+
+    onClick(): void {
+        // Start game here.
+        console.log("Hey there's nothing here yet.");
+    }
+
+    // DONT SET VALUES HERE UNLESS YOU PLAN ON THEM NEVER CHANGING.  I learned something about Vue here.
     created() {
     }
 
