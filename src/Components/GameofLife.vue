@@ -24,11 +24,12 @@ import Vue from "vue";
 import Component from "vue-class-component";
 import {Watch} from "vue-property-decorator";
 
-import * as Cell from "../gameoflife/cell";
-import * as Game from "../gameoflife/game";
+import{GameOfLifeMain} from "../gameoflife/golMain";
 
 @Component
 export default class GameofLifeComponent extends Vue {
+
+
     // Data Properties
     canvas: HTMLCanvasElement;
     context: CanvasRenderingContext2D;
@@ -36,6 +37,7 @@ export default class GameofLifeComponent extends Vue {
     canvasHeight: number = 200;
     pixelScale: number;
     targetFps: number;
+    game: GameOfLifeMain;
 
     selectedCanvasSize: number = 200;
 
@@ -63,8 +65,13 @@ export default class GameofLifeComponent extends Vue {
     }
 
     onClick(): void {
+        this.canvas = document.getElementById("gameCanvas") as HTMLCanvasElement;
+        this.context = this.canvas.getContext("2d") as CanvasRenderingContext2D;
         // Start game here.
         console.log("Hey there's nothing here yet.");
+        this.game = new GameOfLifeMain(this.canvasWidth, this.canvasHeight, this.pixelScale, this.context, this.targetFps);
+
+        this.game.Start();
     }
 
     // DONT SET VALUES HERE UNLESS YOU PLAN ON THEM NEVER CHANGING.  I learned something about Vue here.

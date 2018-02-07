@@ -1,4 +1,4 @@
-import {Cell} from "./cell";
+import Cell from "./cell";
 
 export default class Game {
     private biome: Cell[][];
@@ -75,7 +75,7 @@ export default class Game {
     }
 
     private seedBiome(width: number, height: number): void {
-        const aliveChance = 75;
+        const aliveChance = 10;
 
         for (let x = 0; x < width; x++) {
             const column: Cell[] = [];
